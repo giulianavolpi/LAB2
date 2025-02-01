@@ -22,7 +22,7 @@ public class MainP1 {
             filas[i].start();
         }
 
-        // compartido.start();
+        compartido.darTotal();
 
     }
 

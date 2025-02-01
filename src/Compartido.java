@@ -1,7 +1,7 @@
-public class Compartido extends Thread {
+public class Compartido {
 
     private int suma;
-    private int[][] matriz;
+    // private int[][] matriz;
 
     public synchronized void adicionarAcumFila(int sumaFila) {
 

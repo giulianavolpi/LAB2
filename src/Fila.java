@@ -13,12 +13,14 @@ public class Fila extends Thread {
     @Override
     public void run() {
         int sumaFila = 0;
+
         for (int i = 0; i < fila.length; i++) {
             sumaFila += fila[i];
         }
         compartido.adicionarAcumFila(sumaFila);
         if (esUltimo) {
             compartido.darTotal();
+
         }
     }
 
