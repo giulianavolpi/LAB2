@@ -1,8 +1,7 @@
 import java.util.Random;
 
 class Disponibilidad {
-    private volatile boolean hayEspacio = true; 
-
+    private volatile boolean hayEspacio = true;
 
     public synchronized boolean darHayEspacio() {
         return hayEspacio;
@@ -27,7 +26,7 @@ class Parqueo {
     public synchronized boolean intentarEntrar(String auto) {
         if (espaciosOcupados < capacidadMaxima) {
             espaciosOcupados++;
-            //revisa si hay espacios disponibles
+            // revisa si hay espacios disponibles
             if (espaciosOcupados >= capacidadMaxima) {
                 // sincroniza
                 disponibilidad.modHayEspacio(false);
@@ -68,7 +67,7 @@ class Auto extends Thread {
             if (Parqueo.intentarEntrar(nombre)) {
                 estacionado = true;
             } else {
-                
+
                 Thread.yield(); // Cede CPU para permitir que otros hilos corran
                 try {
                     Thread.sleep(10); // Pequeña pausa para evitar un ciclo de espera infinita
@@ -118,3 +117,15 @@ public class ParqueoSimulacionSemiActiva2_2 {
         System.out.println("Simulación finalizada: Todos los autos han entrado y salido.");
     }
 }
+
+// Respuesta a la pregunta teórica:
+// Las principales diferencias observadas se basan en la espera de los carros al
+// entrar al parqueadero.
+// En la implementación 1 todos los autos siguen intentando ingresar así esté
+// lleno, esto genera salidas repetitivas con intentos fallidos.
+// Con respecto a la implementación 2, los autos hacen pausas con el uso de
+// yield() y pausas con el uso de sleep() si el parqueadero está lleno.
+// La forma de implementar la espera en la manera 2 es más controlada y eso
+// genera menos intentos fallidos y menos mensajes de espera.
+// En conclusión la implementación 2 es más eficiente y controlada en la espera
+// de los autos al intentar ingresar al parqueadero.
